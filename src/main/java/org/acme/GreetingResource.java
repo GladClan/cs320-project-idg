@@ -1,6 +1,7 @@
 package org.acme;
 
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -17,8 +18,29 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/name/{name}/")
-    public String hello(@PathParam("name") String name) {
+    @Path("/name/{name}")
+    public String helloName(@PathParam("name") String name) {
         return "Hello " + name;
+    }
+    
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/name")
+    public String helloPost(Person p) {
+        return "Hello " + p.getFirst() + " " + p.getLast();
+    }
+
+    public static class Person {
+        private String first;
+        private String last;
+
+        public String getFirst() { return first; }
+        public void setFirst(String first){
+            this.first = first;
+        }
+        public String getLast() { return last; }
+        public void setLast(String last){
+            this.last = last;
+        }
     }
 }
