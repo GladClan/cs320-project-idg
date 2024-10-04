@@ -1,5 +1,6 @@
 package org.acme;
 
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -16,11 +17,48 @@ public class GreetingResource {
         return "Hello RESTEasy";
     }
 
+    @Path("/name/{name}")
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public String helloName(@PathParam("name") String name) {
+        UserName userName = new UserName(name);
+        userName.persist();
+        return "Hello " + name + "! Your name has been stored in the database.";
+    }
+
+    @Path("/name/list")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/name/{name}")
-    public String helloName(@PathParam("name") String name) {
-        return "Hello " + name;
+    public String helloNameList() {
+        return UserName.listAll().toString().length() < 3 ? "No names stored in the database." : UserName.listAll().toString();
+    }
+
+    @Path("/name/update/{name}/{new}")
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public String helloNameUpdate(@PathParam("name") String name, @PathParam("new") String newName) {
+        if (UserName.find("name", name).list().isEmpty()) {
+            return String.format("Sorry %s, the name %s does not exist in the database.", newName, name);
+        }
+        UserName userName = UserName.find("name", name).firstResult();
+        userName.name = newName;
+        userName.persist();
+        return "Hello " + newName + "! Your name has been updated in the database.";
+    }
+
+    @Path("/name/remove/{name}") 
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public String helloNameDelete(@PathParam("name") String name) {
+        if (UserName.find("name", name) == null) {
+            return String.format("The name '%s'does not exist in the database.", name);
+        }
+        UserName userName = UserName.find("name", name).firstResult();
+        userName.delete();
+        return String.format("The name %s has been deleted from the database.", name);
     }
     
     @POST
