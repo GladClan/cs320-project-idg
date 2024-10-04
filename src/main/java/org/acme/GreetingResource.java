@@ -17,6 +17,7 @@ public class GreetingResource {
         return "Hello RESTEasy";
     }
 
+    //Create
     @Path("/name/{name}")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -27,6 +28,7 @@ public class GreetingResource {
         return "Hello " + name + "! Your name has been stored in the database.";
     }
 
+    //Read
     @Path("/name/list")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,7 @@ public class GreetingResource {
         return UserName.listAll().toString().length() < 3 ? "No names stored in the database." : UserName.listAll().toString();
     }
 
+    //Update
     @Path("/name/update/{name}/{new}")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -48,6 +51,7 @@ public class GreetingResource {
         return "Hello " + newName + "! Your name has been updated in the database.";
     }
 
+    //Delete
     @Path("/name/remove/{name}") 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
