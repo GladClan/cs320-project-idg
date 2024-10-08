@@ -1,11 +1,17 @@
 import './App.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     const [message, setMessage] = useState('');
     const [firstName, setFirst] = useState('');
     const [lastName, setLast] = useState('');
     const [submitted, setSubmitted] = useState(false);
+
+    const navigate = useNavigate();
+        const navigateToHome = () => {
+            navigate('/Home');
+    }
 
     const fetchMessage = async (e) => {
         e.preventDefault();
@@ -25,6 +31,7 @@ function App() {
     };
 
     return (
+        <>
         <form className={"name-form"} onSubmit={fetchMessage}>
             <h2>Personalized Greeting</h2>
                 <div className={"input"}>
@@ -43,7 +50,11 @@ function App() {
                     <p className={"message"}>{message}</p>
                 </div>
             )}
+            <button className={"btn"} onClick={navigateToHome}>
+                Go Home
+            </button>
         </form>
+        </>
     );
 }
 
