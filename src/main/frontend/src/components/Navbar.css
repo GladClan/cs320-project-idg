@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.link {
+    color: #454545;
+    margin: 10px;
+    text-decoration: underline;
+
+    &:hover {
+        color: #a0a0a0;
+    }
+}

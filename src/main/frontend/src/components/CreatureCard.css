@@ -1,0 +1,63 @@
+.creature-card {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    background-color: gray;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 200px;
+    background-position: center;
+    border-radius: 25%;
+  }
+  
+  .creature-card .creature-card-header h2 {
+    font-size: 24px;
+    text-transform: capitalize;
+    margin: 16px 0px;
+    font-weight: bold;
+  }
+  
+  .creature-card p {
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.5;
+    margin: 0px;
+    margin-bottom: 16px;
+  }
+  
+  .creature-card a {
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+  }
+  
+  .creature-card a:hover {
+    text-decoration: underline;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    background-color: lightgray;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  

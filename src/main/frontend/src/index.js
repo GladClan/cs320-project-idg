@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Home from './Home';
+import Profile from './Profile';
+import Creatures from './Creatures';
+import Character from './Character';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
@@ -11,10 +14,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Navbar/>
+    <Navbar />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Creatures" element={<Creatures />} />
+        <Route path="/Character" element={<Character />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

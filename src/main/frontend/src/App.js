@@ -31,30 +31,26 @@ function App() {
     };
 
     return (
-        <>
         <form className={"name-form"} onSubmit={fetchMessage}>
-            <h2>Personalized Greeting</h2>
-                <div className={"input"}>
-                    <p className={"name"}>First name:</p>
+            <h2>Signin</h2>
+                <div className={"form"}>
+                    <p className={"name"}>Email or username:</p>
                     <input type={"text"} value={firstName} onChange={(e) => setFirst(e.target.value)} />
                 </div>
-                <div className={"input"}>
-                    <p className={"name"}>Last name:</p>
+                <div className={"form"}>
+                    <p className={"name"}>Password:</p>
                     <input type={"text"} value={lastName} onChange={(e) => setLast(e.target.value)} />
                 </div>
+                
             <button className={"btn"} type={"submit"}>
-                Submit
+                Sign in
             </button>
             {submitted && (
                 <div>
                     <p className={"message"}>{message}</p>
                 </div>
             )}
-            <button className={"btn"} onClick={navigateToHome}>
-                Go Home
-            </button>
         </form>
-        </>
     );
 }
 
