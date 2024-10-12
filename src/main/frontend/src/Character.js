@@ -27,6 +27,7 @@ const Character = () => {
             <div className="character">
                 <div class="character-card">
                     <h1>{characterName}</h1>
+                    <img src={`${process.env.PUBLIC_URL}/hoodie_chibi.png`} alt={characterName} className="image" />
                     <p>{description}</p>
                     <p className="name">Skills:</p>
                     <p>{skills}</p>
