@@ -3,6 +3,8 @@ package org.acme;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -38,7 +40,7 @@ public class GreetingResource {
 
     //Update
     @Path("/name/update/{name}/{new}")
-    @POST
+    @PATCH
     @Produces(MediaType.TEXT_PLAIN)
     @Transactional
     public String helloNameUpdate(@PathParam("name") String name, @PathParam("new") String newName) {
@@ -53,7 +55,7 @@ public class GreetingResource {
 
     //Delete
     @Path("/name/remove/{name}") 
-    @POST
+    @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     @Transactional
     public String helloNameDelete(@PathParam("name") String name) {
