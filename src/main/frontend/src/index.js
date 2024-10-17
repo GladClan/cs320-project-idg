@@ -6,6 +6,8 @@ import Home from './Home';
 import Profile from './Profile';
 import Creatures from './Creatures';
 import Character from './Character';
+import Signup from './Signup';
+import EditCreature from './EditCreature';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
@@ -21,6 +23,8 @@ root.render(
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Creatures" element={<Creatures />} />
         <Route path="/Character" element={<Character />} />
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="/edit/{name}" element={<EditCreature />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

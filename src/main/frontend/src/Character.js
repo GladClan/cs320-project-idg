@@ -12,6 +12,14 @@ const Character = () => {
 
     const newCharacter = (e) => {
         e.preventDefault();
+        if (!characterName) {
+            alert("Please give your character a name!");
+            return;
+        }
+        if (!description) {
+            alert("Say something about " + characterName + ", give them a description!");
+            return;
+        }
         // const newCharacter = {
         //     characterName: characterName,
         //     description: description,
@@ -27,7 +35,7 @@ const Character = () => {
             <div className="character">
                 <div class="character-card">
                     <h1>{characterName}</h1>
-                    <img src={`${process.env.PUBLIC_URL}/hoodie_chibi.png`} alt={characterName} className="image" />
+                    <img src={`${process.env.PUBLIC_URL}/hoodie_chibi.png`} alt={characterName} />
                     <p>{description}</p>
                     <p className="name">Skills:</p>
                     <p>{skills}</p>
