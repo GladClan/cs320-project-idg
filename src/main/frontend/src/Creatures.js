@@ -12,6 +12,20 @@ function Creatures() {
 
     const [hasCreatures, setHasCreatures] = useState(false);
 
+    const fetchCreatures = async () => {
+        console.log("Fetching creatures...");
+        const response = await fetch("/creatures/read", {
+            method: "GET",
+            headers: {"Content-Type": "application/json",},
+        });
+        console.log("Fetched creatures.");
+        const data = await response.json();
+        setCreatures(data);
+        console.log("Creatures: " + data);
+        setHasCreatures(data.length > 0);
+        console.log("Has creatures: " + hasCreatures);
+    }
+
     const newCreature = (e) => {
         e.preventDefault();
         if (!name) {
@@ -25,15 +39,10 @@ function Creatures() {
                 name: name,
                 content: content,
                 skills: skills,
-                items: items,
+                items: items
             }),
         });
-        setCreatures(
-            fetch("/creatures/read"), {
-                method: "GET",
-                headers: {"Content-Type": "application/json",},
-            }
-        );
+        fetchCreatures();
         setHasCreatures(creatures.length > 0);
         setName("");
         setContent("");

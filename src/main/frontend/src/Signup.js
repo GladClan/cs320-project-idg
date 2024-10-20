@@ -30,7 +30,7 @@ function Signup() {
             alert("Passwords do not match");
             return false;
         }
-        const response = await fetch('http://localhost:8080/signup', {
+        const response = await fetch('/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,9 +46,6 @@ function Signup() {
         }
         else if (status === 201) {
             navigateToSignin();
-        }
-        else {
-            alert("An unknown error occurred.");
         }
         return true;
     }

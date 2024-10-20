@@ -54,7 +54,14 @@ public class CreaturesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Creature> read() {
-        return Creature.listAll();
+        return Creature.findAll().list();
+    }
+
+    @Path("/read/{name}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Creature read(@PathParam("name") String name) {
+        return Creature.findByName(name);
     }
 
     @Path("/update/{name}")
@@ -73,10 +80,16 @@ public class CreaturesResource {
         return Response.status(Status.NO_CONTENT).build();
     }
 
-    @Path("/read/{name}")
-    @GET
+    @Path("/delete")
+    @DELETE
+    @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Creature read(@PathParam("name") String name) {
-        return Creature.findByName(name);
+    public Response delete(creatureEntity c) {
+        Creature entity = Creature.findByName(c.getName());
+        if (entity == null) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        entity.delete();
+        return Response.status(Status.NO_CONTENT).build();
     }
 }

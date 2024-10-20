@@ -35,12 +35,10 @@ public class LoginResource {
     }
 
     @POST
+    @Transactional
     @Produces(MediaType.TEXT_PLAIN)
-    public Response signin(userEntity u) {
+    public Response signup(userEntity u) {
         List<User> userList = User.listAll();
-        if (userList.isEmpty()) {
-            return null;
-        }
         if (u.getName() == "" || u.getEmail() == "" || u.getPassword() == "") {
             return Response.status(Response.Status.BAD_REQUEST).entity("Please fill in all fields.").build();
         }
@@ -71,7 +69,7 @@ public class LoginResource {
         if (userList.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).entity("No users found.").build();
         }
-        if (u.getName() == "" || u.getPassword() == "") {
+        if (u.getName().equals("") || u.getPassword().equals("")) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Please fill in all fields.").build();
         }
         for (User userData : userList) {
