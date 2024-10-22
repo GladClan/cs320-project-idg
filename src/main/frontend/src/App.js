@@ -18,12 +18,21 @@ function App() {
             navigate('/signup');
     }
 
-    const fetchMessage = async (e) => {
+    const handleLoginForm = async (e) => {
         e.preventDefault();
-        if (!username || !password) {
+        if (!username) {
+            setHasName(false);
+            setHasPass(true);
             return;
         }
+        else { setHasName(true); }
+        if (!password) {
+            setHasPass(false);
+            return;
+        }
+        else { setHasPass(true); }
         setMessage("Welcome!");
+        console.log("Fetching account: " + username + " " + password);
         const response = await fetch('/signup/login', {
             method: 'POST',
             headers: {
@@ -31,7 +40,7 @@ function App() {
             },
             body: JSON.stringify({ name: username, password: password })
         });
-        console.log(username + " " + password);
+        console.log("Fetch complete");
         setStatus(response.status);
         const text = await response.text();
         setMessage(text);
@@ -48,25 +57,25 @@ function App() {
 
     return (
         <div className={"name-form"}>
-            <form onSubmit={fetchMessage}>
+            <form onSubmit={handleLoginForm}>
                 <h2>Signin</h2>
                     <div className={"form"}>
                         <p className={"name"}>Username:</p>
                         <input type={"text"} value={username} onChange={(e) => setUsername(e.target.value)} />
                     </div>
-                    {!hasName && <p>Please enter yur username</p>}
+                    {!hasName && <p className='error'>Please enter your username</p>}
                     <div className={"form"}>
                         <p className={"name"}>Password:</p>
                         <input type={"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    {!hasPass && <p>Please enter your password</p>}
+                    {!hasPass && <p className='error'>Please enter your password</p>}
                     
                 <button className={"btn"} type={"submit"}>
                     Sign in
                 </button>
-                {status !== 0 && <p>{message}</p>}
+                {status !== 0 && <p className='error'>{message}</p>}
             </form>
-            <p>Don't have an account? Sign up today!</p>
+            <p style={{fontWeight: 'bold'}}>Don't have an account? Sign up today!</p>
             <button className={"btn"} onClick={navigateToSignup}>
                 Sign up
             </button>

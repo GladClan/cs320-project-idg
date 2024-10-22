@@ -1,6 +1,6 @@
 import "./Creatures.css";
 import CreatureCard from "./components/CreatureCard";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Creatures() {
     const [creatures, setCreatures] = useState([]);
@@ -20,11 +20,15 @@ function Creatures() {
         });
         console.log("Fetched creatures.");
         const data = await response.json();
-        setCreatures(data);
         console.log("Creatures: " + data);
         setHasCreatures(data.length > 0);
         console.log("Has creatures: " + hasCreatures);
-    }
+        return data;
+    };
+
+    useEffect(() => {
+        setCreatures(fetchCreatures());
+    }, []);
 
     const newCreature = (e) => {
         e.preventDefault();
@@ -42,7 +46,7 @@ function Creatures() {
                 items: items
             }),
         });
-        fetchCreatures();
+        setCreatures(fetchCreatures());
         setHasCreatures(creatures.length > 0);
         setName("");
         setContent("");
@@ -64,20 +68,20 @@ function Creatures() {
                     <h2>Create a new creature</h2>
                     <div className="input">
                         <p className="name">Name:</p>
-                        <input id="name-input" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                        {!hasName && <p className="error">*Please give your creature a name!</p>}
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        {!hasName && <p className="error" style={{color: 'red'}}>*Please give your creature a name!</p>}
                     </div>
                     <div className="input">
                         <p>Description:</p>
-                        <input id="description-input" className="description" type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+                        <input className="description" type="text" value={content} onChange={(e) => setContent(e.target.value)} />
                     </div>
                     <div className="input">
-                        <p>Skills:</p>
-                        <input id="skills-input" type="text" value={skills} onChange={(e) => setSkills(e.target.value)} />
+                        <p>Skills or proficiencies:</p>
+                        <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} />
                     </div>
                     <div className="input">
                         <p>Items:</p>
-                        <input id="items-input" type="text" value={items} onChange={(e) => setItems(e.target.value)} />
+                        <input type="text" value={items} onChange={(e) => setItems(e.target.value)} />
                     </div>
                     <button className="btn" type="submit" onClick={newCreature}>
                         Create Creature
