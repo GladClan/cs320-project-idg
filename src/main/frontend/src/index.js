@@ -17,14 +17,14 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Navbar />
-      <Routes>
+      <Routes> {/*All routes for the webapp go here*/}
         <Route path="/" element={<App />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Creatures" element={<Creatures />} />
         <Route path="/Character" element={<Character />} />
         <Route path="/Signup" element={<Signup />} />
-        <Route path="/edit/{name}" element={<EditCreature />} />
+        <Route path="/edit/:name" element={<EditCreature />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

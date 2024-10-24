@@ -8,16 +8,18 @@ const Character = () => {
     const [skills, setSkills] = useState('');
     const [items, setItems] = useState('');
 
+    const [message, setMessage] = useState(''); //Message for error handling, ie., no character name or description
+
     const [hasCharacter, setHasCharacter] = useState(false);
 
     const newCharacter = (e) => {
         e.preventDefault();
         if (!characterName) {
-            alert("Please give your character a name!");
+            setMessage("Please give your character a name!");
             return;
         }
         if (!description) {
-            alert("Say something about " + characterName + ", give them a description!");
+            setMessage("Say something about " + characterName + ", give them a description!");
             return;
         }
         // const newCharacter = {
@@ -66,6 +68,7 @@ const Character = () => {
                             <input type="text" value={items} onChange={(e) => setItems(e.target.value)}/>
                         </div>
                         <button className="btn" type="submit">Save and create!</button>
+                        {message && <p className="error" style={{color: red}}>{message}</p>}
                     </form>
                 </div>
             </div>

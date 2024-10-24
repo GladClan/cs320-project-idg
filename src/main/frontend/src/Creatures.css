@@ -2,24 +2,23 @@
     margin: 16px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0px;
-} */
+.container {
+    background-color: #ddd;
+    border-radius: 5%;
+    max-width: 560px;
+}
 
 .create-creature {
-    margin: 16px;
     padding: 24px 32px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 30% 30% 30% 5%;
     padding: 16px;
-    max-width: 50%;
+    max-width: 560px;
 }
 
 .input {

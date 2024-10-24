@@ -6,8 +6,8 @@ import jakarta.persistence.Table;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 @Entity
-@Table(name = "creatures")
-public class Creature extends PanacheEntity {
+@Table(name = "characters")
+public class Character extends PanacheEntity {
     
     @JsonbProperty("name")
     private String name;
@@ -21,9 +21,9 @@ public class Creature extends PanacheEntity {
     @JsonbProperty("items")
     private String items;
 
-    public Creature() {}
+    public Character() {}
 
-    public Creature(String name, String description, String skills, String items) {
+    public Character(String name, String description, String skills, String items) {
         this.name = name;
         this.description = description;
         this.skills = skills;
@@ -58,12 +58,12 @@ public class Creature extends PanacheEntity {
         this.items = items;
     }
 
-    public static Creature findByName(String name) {
+    public static Character findByName(String name) {
         return find("name", name).firstResult();
     }
 
     @Override
     public String toString() {
-        return String.format("Creature{id=%d, name='%s', description='%s', skills='%s', items='%s'}", id, name, description, skills, items);
+        return String.format("Character{id=%d, name='%s', description='%s', skills='%s', items='%s'}", id, name, description, skills, items);
     }
 }

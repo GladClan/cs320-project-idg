@@ -4,30 +4,40 @@ import { useNavigate } from "react-router-dom";
 function Signup() {
 
     const [userName , setUserName] = useState("");
+    const [hasUserName , setHasUserName] = useState(true);
     const [password , setPassword] = useState("");
+    const [hasPassword , setHasPassword] = useState(true);
     const [email , setEmail] = useState("");
+    const [hasEmail , setHasEmail] = useState(true);
+    const [confirmPassword , setConfirmPassword] = useState(true);
+    const [message , setMessage] = useState(""); // To display error messages from the server
     
     const navigate = useNavigate();
     const navigateToSignin = () => {
         navigate('/');
     }
 
+    // Validates that all fields are filled in and that the password and confirm password fields match
+    // If the form is valid, sends a POST request to the server to create a new user and navigates to the signin page
+    // Else sets the message const to the status text from the server (LoginResource.java)
     const validateForm = async (e) => {
         e.preventDefault();
         console.log("Validating form...");
         if (email === "") {
-            alert("Please enter an email");
-            return false;
-        }
+            setHasEmail(false);
+        } else { setHasEmail(true); }
         if (userName === "") {
-            alert("Please enter a username");
-            return false;
-        }
+            setHasUserName(false);
+        } else { setHasUserName(true); }
         if (password === "") {
-            alert("Please enter a password");
-            return false;
-        }if (password !== document.getElementById("confirmPassword").value) {
-            alert("Passwords do not match");
+            setHasPassword(false);
+        } else { setHasPassword(true); }
+        if (password !== document.getElementById("confirmPassword").value) {
+            setConfirmPassword(false);
+        } else { setConfirmPassword(true); }
+        if (!hasEmail || !hasUserName || !hasPassword || !confirmPassword) {
+            console.log("Form not validated. A field was left empty.");
+            setMessage("");
             return false;
         }
         const response = await fetch('/signup', {
@@ -42,11 +52,12 @@ function Signup() {
         const text = await response.text();
         console.log("Status: " + status + "\nResponse: " + text);
         if (status === 400) {
-            alert(text);
+            setMessage(text);
         }
         else if (status === 201) {
             navigateToSignin();
         }
+        setMessage(text);
         return true;
     }
 
@@ -60,21 +71,26 @@ function Signup() {
                             <p className={"name"}>Email:</p>
                             <input id={"email"} type={"email"} value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
+                        {hasEmail ? null : <p className={"error"}>Please enter a valid email address.</p>}
                         <div className={"form"}>
                             <p className={"name"}>Username:</p>
                             <input id={"username"} type={"text"} value={userName} onChange={(e) => setUserName(e.target.value)} />
                         </div>
+                        {hasUserName ? null : <p className={"error"}>Please enter a username.</p>}
                         <div className={"form"}>
                             <p className={"name"}>Password:</p>
                             <input id={"password"} type={"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
+                        {hasPassword ? null : <p className={"error"}>Please enter a password.</p>}
                         <div className={"form"}>
                             <p className={"name"}>Confirm password:</p>
                             <input id={"confirmPassword"} type={"password"} />
                         </div>
+                        {confirmPassword ? null : <p className={"error"}>Passwords do not match.</p>}
                     <button className={"btn"} type={"submit"}>
                         Sign up
                     </button>
+                    <p className={"error"} style={{fontWeight: 'bold'}}>{message}</p>
                 </div>
             </form>
             <p>Already have an account?</p>

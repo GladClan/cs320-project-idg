@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function App() {
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState(''); // Message to display to the user if the login was successful or not
     const [username, setUsername] = useState('');
     const [hasName, setHasName] = useState(true);
     const [password, setPassword] = useState('');
@@ -18,19 +18,18 @@ function App() {
             navigate('/signup');
     }
 
+    // Function to handle the login form submission. Validates the user inputs and sends the information to the server (LoginResource.java)
     const handleLoginForm = async (e) => {
         e.preventDefault();
         if (!username) {
             setHasName(false);
-            setHasPass(true);
-            return;
-        }
-        else { setHasName(true); }
+        } else { setHasName(true); }
         if (!password) {
             setHasPass(false);
+        } else { setHasPass(true); }
+        if (!username || !password) {
             return;
         }
-        else { setHasPass(true); }
         setMessage("Welcome!");
         console.log("Fetching account: " + username + " " + password);
         const response = await fetch('/signup/login', {
