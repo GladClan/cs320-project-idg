@@ -1,6 +1,7 @@
 import "./Creatures.css";
 import CreatureCard from "./components/CreatureCard";
 import React, { useEffect, useState } from "react";
+import { API_URL } from './config';
 
 function Creatures() {
     const [creatures, setCreatures] = useState([]);
@@ -17,7 +18,7 @@ function Creatures() {
     // Sends the request to the server (file: CreatureResource.java)
     const fetchCreatures = async () => {
         console.log("Fetching creatures...");
-        const response = await fetch("/creatures/read", {
+        const response = await fetch(`${API_URL}/creatures/read`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json",},
         });
@@ -48,7 +49,7 @@ function Creatures() {
             setHasName(false);
             return;
         }
-        const response = fetch("/creatures/create", {
+        const response = fetch(`${API_URL}/creatures/create`, {
             method: "POST",
             headers: {"Content-Type": "application/json",},
             body: JSON.stringify({

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from './config';
 
 function App() {
     const [message, setMessage] = useState(''); // Message to display to the user if the login was successful or not
@@ -32,7 +33,7 @@ function App() {
         }
         setMessage("Welcome!");
         console.log("Fetching account: " + username + " " + password);
-        const response = await fetch('/signup/login', {
+        const response = await fetch(`${API_URL}/signup/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

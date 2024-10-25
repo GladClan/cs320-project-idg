@@ -68,7 +68,7 @@ const Character = () => {
                             <input type="text" value={items} onChange={(e) => setItems(e.target.value)}/>
                         </div>
                         <button className="btn" type="submit">Save and create!</button>
-                        {message && <p className="error" style={{color: red}}>{message}</p>}
+                        {message && <p className="error" style={{color: 'red'}}>{message}</p>}
                     </form>
                 </div>
             </div>

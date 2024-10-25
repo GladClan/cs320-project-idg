@@ -19,7 +19,7 @@ const EditCreature = () => {
     useEffect(() => {
         const fetchCreature = async () => {
             console.log("Fetching " + name);
-            const response = await fetch(`/creatures/read/${name}`,
+            const response = await fetch(`${API_URL}/creatures/read/${name}`,
                 { method: "PATCH", headers: { "Content-Type": "application/json" } }
             );
             console.log("Fetched creature: " + name);
@@ -47,7 +47,7 @@ const EditCreature = () => {
             return;
         }
         console.log("Updating creature: " + name);
-        const response = await fetch(`/creatures/update/${name}`, {
+        const response = await fetch(`${API_URL}/creatures/update/${name}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json",},
             body: JSON.stringify({
@@ -73,7 +73,7 @@ const EditCreature = () => {
 
     // Deletes the creature data on the server and navigates back to the Creatures page.
     const confirmDelete = async () => {
-        const response = await fetch(`/creatures/delete/`, {
+        const response = await fetch(`${API_URL}/creatures/delete/`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -40,7 +40,7 @@ function Signup() {
             setMessage("");
             return false;
         }
-        const response = await fetch('/signup', {
+        const response = await fetch(`${API_URL}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
