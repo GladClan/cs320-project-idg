@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const EditCreature = () => {
-    const { name } = useParams(); // Parameter from the path /edit/:name.
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const { name } = queryParams.get("name");
     const [creature, setCreature] = useState({});
 
     const [newName, setName] = useState("");
@@ -51,6 +52,7 @@ const EditCreature = () => {
             method: "PATCH",
             headers: {"Content-Type": "application/json",},
             body: JSON.stringify({
+                id: creature.id,
                 name: newName,
                 description: description,
                 skills: skills,

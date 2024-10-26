@@ -1,6 +1,5 @@
 import "./CreatureCard.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const CreatureCard = ({ image, name, description, skills, items }) => {
   const defaultImage = image || `${process.env.PUBLIC_URL}/hoodie_gen.png`;
@@ -8,7 +7,7 @@ const CreatureCard = ({ image, name, description, skills, items }) => {
   const navigate = useNavigate();
 
   const editCreature = () => {
-    navigate(`/edit/${name}`);
+    navigate(`/edit?name=${encodeURIComponent(name)}`);
   };
 
   return (

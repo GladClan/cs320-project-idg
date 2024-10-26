@@ -24,7 +24,7 @@ root.render(
         <Route path="/Creatures" element={<Creatures />} />
         <Route path="/Character" element={<Character />} />
         <Route path="/Signup" element={<Signup />} />
-        <Route path="/edit/:name" element={<EditCreature />} />
+        <Route path="/edit" element={<EditCreature />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
