@@ -59,8 +59,8 @@ public class CreaturesResource {
     @PATCH
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("name") String name, creatureEntity c) {
-        Creature entity = Creature.findByName(name);
+    public Response update(Long id, creatureEntity c) {
+        Creature entity = Creature.findById(id);
         if (entity == null) {
             return Response.status(Status.NOT_FOUND).build();
         }
