@@ -21,7 +21,7 @@ const EditCreature = () => {
     useEffect(() => {
         const fetchCreature = async () => {
             console.log("Fetching " + name);
-            const response = await fetch(`${API_URL}/creatures/read/${name}`,
+            const response = await fetch(`${API_URL}/creatures/read/${encodeURIComponent(name)}`,
                 { method: "PATCH", headers: { "Content-Type": "application/json" } }
             );
             console.log("Fetched creature: " + name);
@@ -49,7 +49,7 @@ const EditCreature = () => {
             return;
         }
         console.log("Updating creature: " + name);
-        const response = await fetch(`${API_URL}/creatures/update/${name}`, {
+        const response = await fetch(`${API_URL}/creatures/update`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json",},
             body: JSON.stringify({
@@ -86,7 +86,7 @@ const EditCreature = () => {
                 items: items
             }),
         });
-        if (response.status !== 200) {
+        if (await response.status !== 200) {
             console.log("Status: " + response.status + ", " + response.statusText);
             setMessage("Failed to delete creature");
             setShowConfirm(false);
@@ -106,7 +106,7 @@ const EditCreature = () => {
     return (
         <div className="container">
             <div className="create-creature">
-                <h2>Create a new creature</h2>
+                <h2>Edit your creature</h2>
                 <div className="input">
                     <p className="name">Name:</p>
                     <input type="text" value={newName} onChange={(e) => setName(e.target.value)} />

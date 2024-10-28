@@ -13,8 +13,8 @@ function Creatures() {
 
     const [hasCreatures, setHasCreatures] = useState(false);
 
-    // Runs once on load to fetch the creatures from the server (see the useEffect below, line 39).
-    // This is a PATCH request because GET does not seem to be working as of 10/20/2024. A GET request freezes the server on localhost:8080
+    // Runs once on load to fetch the creatures from the server (see the useEffect below, line 40).
+    // This is a PATCH request because GET does not seem to be working as of 10/28/2024. A GET request freezes the server on API_URL/creatures/read
     // Sends the request to the server (file: CreatureResource.java)
     const fetchCreatures = async () => {
         console.log("Fetching creatures...");

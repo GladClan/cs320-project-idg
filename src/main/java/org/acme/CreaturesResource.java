@@ -2,6 +2,7 @@ package org.acme;
 
 import java.util.List;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.DELETE;
@@ -11,6 +12,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.Encoded;
 
 @Path("/creatures")
 public class CreaturesResource {
@@ -50,12 +52,12 @@ public class CreaturesResource {
     @Path("/read/{name}")
     @PATCH
     @Produces(MediaType.APPLICATION_JSON)
-    public Creature read(@PathParam("name") String name) {
+    public Creature read(@Encoded @PathParam("name") String name) {
         return Creature.findByName(name);
     }
 
     // Updates a specific creature stored in the database using a path parameter
-    @Path("/update/{name}")
+    @Path("/update/")
     @PATCH
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
